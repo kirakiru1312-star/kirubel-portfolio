@@ -1,0 +1,176 @@
+{
+  "info": {
+    "name": "Kirubel Portfolio API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Complete API collection for the Kirubel Portfolio website.\n\nSetup:\n1. Set {{baseUrl}} to http://localhost:5000\n2. POST /api/auth/login to get your token\n3. Set {{token}} to the returned token value\n4. All /api/admin/* requests use Bearer {{token}}"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000", "type": "string" },
+    { "key": "token",   "value": "",                     "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public",
+      "item": [
+        { "name": "Get Profile",      "request": { "method": "GET", "url": "{{baseUrl}}/api/public/profile" } },
+        { "name": "Get Projects",     "request": { "method": "GET", "url": "{{baseUrl}}/api/public/projects" } },
+        { "name": "Get Skills",       "request": { "method": "GET", "url": "{{baseUrl}}/api/public/skills" } },
+        { "name": "Get Services",     "request": { "method": "GET", "url": "{{baseUrl}}/api/public/services" } },
+        { "name": "Get Experience",   "request": { "method": "GET", "url": "{{baseUrl}}/api/public/experience" } },
+        { "name": "Get Education",    "request": { "method": "GET", "url": "{{baseUrl}}/api/public/education" } },
+        { "name": "Get Achievements", "request": { "method": "GET", "url": "{{baseUrl}}/api/public/achievements" } },
+        { "name": "Get Contact",      "request": { "method": "GET", "url": "{{baseUrl}}/api/public/contact" } },
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/public/messages",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"subject\": \"Project inquiry\",\n  \"message\": \"Hi! I'd like to work with you.\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Profile",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/admin/profile",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/admin/profile",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Kirubel Gelaw\",\n  \"tagline\": \"Full-Stack Developer\",\n  \"bio\": \"Passionate developer...\",\n  \"location\": \"Addis Ababa, Ethiopia\",\n  \"email\": \"kirubel@example.com\",\n  \"phone\": \"+251912345678\",\n  \"years_experience\": 3,\n  \"projects_count\": 20,\n  \"clients_count\": 15\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Projects",
+      "item": [
+        {
+          "name": "List Projects",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/admin/projects",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        },
+        {
+          "name": "Create Project",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/admin/projects",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"New Project\",\n  \"description\": \"A great project\",\n  \"tech_stack\": \"React, Node.js\",\n  \"github_url\": \"https://github.com/kirubel/project\",\n  \"live_url\": \"https://project.example.com\",\n  \"featured\": 1,\n  \"published\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Project",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/admin/projects/:id",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Updated Title\",\n  \"published\": 0\n}" }
+          }
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/admin/projects/:id",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Skills",
+      "item": [
+        { "name": "List Skills", "request": { "method": "GET", "url": "{{baseUrl}}/api/admin/skills", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] } } },
+        {
+          "name": "Create Skill",
+          "request": {
+            "method": "POST", "url": "{{baseUrl}}/api/admin/skills",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Vue.js\",\n  \"proficiency\": 75,\n  \"category\": \"Frontend\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Contact",
+      "item": [
+        { "name": "Get Contact", "request": { "method": "GET", "url": "{{baseUrl}}/api/admin/contact", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] } } },
+        {
+          "name": "Update Contact",
+          "request": {
+            "method": "PUT", "url": "{{baseUrl}}/api/admin/contact",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"kirubel@example.com\",\n  \"phone\": \"+251912345678\",\n  \"address\": \"Addis Ababa, Ethiopia\",\n  \"working_hours\": \"Mon-Fri 9am-6pm\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Messages",
+      "item": [
+        { "name": "List Messages", "request": { "method": "GET", "url": "{{baseUrl}}/api/admin/messages", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] } } },
+        { "name": "Mark Read",     "request": { "method": "PUT", "url": "{{baseUrl}}/api/admin/messages/:id/read", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] } } },
+        { "name": "Delete",        "request": { "method": "DELETE", "url": "{{baseUrl}}/api/admin/messages/:id", "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] } } }
+      ]
+    },
+    {
+      "name": "Admin - Upload",
+      "item": [
+        {
+          "name": "Upload File",
+          "request": {
+            "method": "POST", "url": "{{baseUrl}}/api/admin/upload",
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "body": { "mode": "formdata", "formdata": [{ "key": "file", "type": "file", "src": "" }] }
+          }
+        }
+      ]
+    }
+  ]
+}

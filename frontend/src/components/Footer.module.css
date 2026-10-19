@@ -1,0 +1,35 @@
+.footer {
+  background: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border);
+  padding: 32px 0;
+}
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.logoIcon {
+  width: 32px; height: 32px;
+  background: var(--color-accent);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 800; font-size: 1rem;
+}
+.name { font-weight: 600; font-size: 0.95rem; }
+.copy { color: var(--color-text-muted); font-size: 0.85rem; }
+.backTop {
+  width: 36px; height: 36px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-muted);
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+.backTop:hover { border-color: var(--color-accent); color: var(--color-accent); }
+@media (max-width: 640px) {
+  .inner { justify-content: center; text-align: center; }
+}

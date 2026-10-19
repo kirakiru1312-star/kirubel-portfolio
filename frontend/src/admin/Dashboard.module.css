@@ -1,0 +1,22 @@
+.header { margin-bottom: 32px; }
+.title { font-size: 1.8rem; font-weight: 800; margin-bottom: 4px; }
+.subtitle { color: var(--color-text-muted); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px; }
+.card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex; align-items: center; gap: 16px;
+  text-decoration: none; color: inherit;
+  transition: all 0.2s;
+}
+.card:hover { border-color: var(--color-accent); transform: translateY(-2px); box-shadow: var(--shadow-accent); }
+.cardIcon { font-size: 1.8rem; }
+.cardInfo { flex: 1; }
+.cardCount { display: block; font-size: 1.8rem; font-weight: 800; font-family: var(--font-heading); color: var(--color-accent); line-height: 1; }
+.cardLabel { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 2px; display: block; }
+.cardArrow { color: var(--color-text-dim); font-size: 1.1rem; }
+.quickLinks { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 28px; }
+.qlTitle { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+.qlGrid { display: flex; flex-wrap: wrap; gap: 12px; }
