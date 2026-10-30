@@ -58,9 +58,7 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <Link to="/admin" className={`btn btn-outline ${styles.adminBtn}`} onClick={() => setMenuOpen(false)}>
-            Admin
-          </Link>
+
         </nav>
 
         <button
