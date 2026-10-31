@@ -18,27 +18,45 @@ import AdminProfile from './admin/Profile'
 import AdminMessages from './admin/Messages'
 import ProtectedRoute from './admin/ProtectedRoute'
 
+class ErrorBoundary extends React.Component {
+  constructor(props) { super(props); this.state = { error: null } }
+  static getDerivedStateFromError(error) { return { error } }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{padding:'40px',color:'#f1f5f9',background:'#0a0f1e',minHeight:'100vh',fontFamily:'monospace'}}>
+          <h2 style={{color:'#ef4444'}}>Something went wrong</h2>
+          <pre style={{color:'#94a3b8',marginTop:'16px',whiteSpace:'pre-wrap'}}>{this.state.error.toString()}</pre>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
+
 export default function App() {
   return (
-    <AuthProvider>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
-          <Route index element={<AdminDashboard />} />
-          <Route path="profile"      element={<AdminProfile />} />
-          <Route path="projects"     element={<AdminProjects />} />
-          <Route path="skills"       element={<AdminSkills />} />
-          <Route path="services"     element={<AdminServices />} />
-          <Route path="experience"   element={<AdminExperience />} />
-          <Route path="education"    element={<AdminEducation />} />
-          <Route path="achievements" element={<AdminAchievements />} />
-          <Route path="contact"      element={<AdminContact />} />
-          <Route path="messages"     element={<AdminMessages />} />
-        </Route>
-      </Routes>
-      <Footer />
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="profile"      element={<AdminProfile />} />
+            <Route path="projects"     element={<AdminProjects />} />
+            <Route path="skills"       element={<AdminSkills />} />
+            <Route path="services"     element={<AdminServices />} />
+            <Route path="experience"   element={<AdminExperience />} />
+            <Route path="education"    element={<AdminEducation />} />
+            <Route path="achievements" element={<AdminAchievements />} />
+            <Route path="contact"      element={<AdminContact />} />
+            <Route path="messages"     element={<AdminMessages />} />
+          </Route>
+        </Routes>
+        <Footer />
+      </AuthProvider>
+    </ErrorBoundary>
   )
 }
